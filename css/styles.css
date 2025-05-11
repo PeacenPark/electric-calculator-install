@@ -33,6 +33,9 @@ body {
   max-width: 600px;
   margin: 0 auto;
   padding: 30px 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 /* 앱 헤더 */
