@@ -233,10 +233,16 @@ body {
 }
 
 .qr-code {
-  margin: 0 auto 15px;
-  width: 150px;
-  height: 150px;
-  background: white;
+  min-height: 200px;
+  min-width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
 }
 
 .qr-section p {
