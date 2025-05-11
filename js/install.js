@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', function() {
   // 서비스 워커 등록
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js')
+    navigator.serviceWorker.register('./sw.js')  // 경로 수정
       .then(registration => {
         console.log('ServiceWorker 등록 성공:', registration.scope);
       })
@@ -55,27 +55,26 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   };
   
-  // QR 코드 생성
-  document.addEventListener('DOMContentLoaded', function() {
-  const qrCodeElement = document.getElementById('qrCode');
-  if (qrCodeElement) {
-    // 현재 페이지의 URL을 QR 코드로 생성
-    const currentUrl = window.location.href;
-    QRCode.toCanvas(qrCodeElement, currentUrl, {
-      width: 200,
-      margin: 2,
-      color: {
-        dark: '#2b5596',
-        light: '#ffffff'
-      }
-    }, function(error) {
-      if (error) {
-        console.error('QR 코드 생성 중 오류 발생:', error);
-        qrCodeElement.innerHTML = '<p>QR 코드 생성에 실패했습니다.</p>';
-      }
-    });
+  // QR 코드 생성 함수 정의
+  function generateQRCode() {
+    if (qrCodeElement) {
+      // 현재 페이지의 URL을 QR 코드로 생성
+      const currentUrl = window.location.href;
+      QRCode.toCanvas(qrCodeElement, currentUrl, {
+        width: 200,
+        margin: 2,
+        color: {
+          dark: '#2b5596',
+          light: '#ffffff'
+        }
+      }, function(error) {
+        if (error) {
+          console.error('QR 코드 생성 중 오류 발생:', error);
+          qrCodeElement.innerHTML = '<p>QR 코드 생성에 실패했습니다.</p>';
+        }
+      });
+    }
   }
-});
   
   // PWA 설치 프롬프트 이벤트
   let deferredPrompt;
@@ -210,6 +209,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   // 화면 방향 변경 감지 (UI 조정 용도)
+  let lastWidth = window.innerWidth;
   window.addEventListener('resize', () => {
     // QR 코드 다시 생성 (필요한 경우)
     if (window.innerWidth !== lastWidth) {
@@ -217,6 +217,4 @@ document.addEventListener('DOMContentLoaded', function() {
       lastWidth = window.innerWidth;
     }
   });
-  
-  let lastWidth = window.innerWidth;
 });
