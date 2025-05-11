@@ -218,8 +218,8 @@ body {
 /* QR 코드 섹션 */
 .qr-section {
   text-align: center;
-  margin: 10px auto;
-  max-width: 200px;
+  margin: 30px auto;
+  max-width: 300px;
   padding: 5px;
   background: white;
   border-radius: var(--border-radius);
