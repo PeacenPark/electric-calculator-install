@@ -56,21 +56,32 @@ document.addEventListener('DOMContentLoaded', function() {
   };
   
   // QR 코드 생성
-  const generateQRCode = () => {
-    if (typeof QRCode !== 'undefined' && qrCodeElement) {
-      const currentUrl = window.location.href;
-      QRCode.toCanvas(qrCodeElement, currentUrl, {
-        width: 150,
-        margin: 1,
-        color: {
-          dark: '#2b5596',
-          light: '#ffffff'
-        }
-      }, function(error) {
-        if (error) console.error('QR 코드 생성 오류:', error);
-      });
-    }
-  };
+  document.addEventListener('DOMContentLoaded', function() {
+  // QRCode 객체가 있는지 확인
+  if (typeof QRCode === 'undefined') {
+    console.error('QR 코드 라이브러리가 로드되지 않았습니다.');
+    
+    // 라이브러리 재로드 시도
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/qrcode@1.5.0/build/qrcode.min.js';
+    script.onload = function() {
+      console.log('QR 코드 라이브러리가 성공적으로 로드되었습니다.');
+      generateQRCode(); // QR 코드 생성 함수 호출
+    };
+    script.onerror = function() {
+      console.error('QR 코드 라이브러리 로드에 실패했습니다.');
+      // QR 코드 영역에 오류 메시지 표시
+      const qrElement = document.getElementById('qrCode');
+      if (qrElement) {
+        qrElement.innerHTML = '<p style="color: red;">QR 코드 생성에 실패했습니다.</p>';
+      }
+    };
+    document.head.appendChild(script);
+  } else {
+    // 라이브러리가 로드된 경우 QR 코드 생성
+    generateQRCode();
+  }
+});
   
   // PWA 설치 프롬프트 이벤트
   let deferredPrompt;
