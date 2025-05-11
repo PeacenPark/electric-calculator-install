@@ -19,8 +19,8 @@ const pathMappings = {
   '/jp': '/index.html?lang=ja',
   
   // 원본 앱으로 리디렉션
-  '/app/main': 'https://원본앱주소.com',
-  '/app/cable': 'https://원본앱주소.com/cable2.html'
+  '/app/main': 'https://peacenpark.github.io/electric/',
+  '/app/cable': 'https://peacenpark.github.io/electric//cable2.html'
 };
 
 // 현재 경로 확인
