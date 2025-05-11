@@ -218,7 +218,7 @@ body {
 /* QR 코드 섹션 */
 .qr-section {
   text-align: center;
-  margin: 30px auto;
+  margin: 10px auto;
   max-width: 200px;
   padding: 5px;
   background: white;
