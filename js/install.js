@@ -57,24 +57,37 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // QR 코드 생성 함수 정의
   function generateQRCode() {
-    if (qrCodeElement) {
-      // 현재 페이지의 URL을 QR 코드로 생성
-      const currentUrl = window.location.href;
-      QRCode.toCanvas(qrCodeElement, currentUrl, {
-        width: 200,
-        margin: 2,
-        color: {
-          dark: '#2b5596',
-          light: '#ffffff'
-        }
-      }, function(error) {
-        if (error) {
-          console.error('QR 코드 생성 중 오류 발생:', error);
-          qrCodeElement.innerHTML = '<p>QR 코드 생성에 실패했습니다.</p>';
-        }
-      });
-    }
+  if (qrCodeElement) {
+    // 현재 페이지의 URL을 QR 코드로 생성
+    const currentUrl = window.location.href;
+    
+    // div를 비웁니다
+    qrCodeElement.innerHTML = '';
+    
+    // 새 이미지 요소 생성
+    const img = document.createElement('img');
+    img.style.width = '200px';
+    img.style.height = '200px';
+    
+    // QR 코드를 데이터 URL로 생성하여 이미지에 설정
+    QRCode.toDataURL(currentUrl, {
+      width: 200,
+      margin: 2,
+      color: {
+        dark: '#2b5596',
+        light: '#ffffff'
+      }
+    }, function(error, url) {
+      if (error) {
+        console.error('QR 코드 생성 중 오류 발생:', error);
+        qrCodeElement.innerHTML = '<p>QR 코드 생성에 실패했습니다.</p>';
+      } else {
+        img.src = url;
+        qrCodeElement.appendChild(img);
+      }
+    });
   }
+}
   
   // PWA 설치 프롬프트 이벤트
   let deferredPrompt;
