@@ -220,7 +220,7 @@ body {
   text-align: center;
   margin: 30px auto;
   max-width: 200px;
-  padding: 30px;
+  padding: 5px;
   background: white;
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
