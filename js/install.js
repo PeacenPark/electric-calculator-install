@@ -37,57 +37,64 @@ document.addEventListener('DOMContentLoaded', function() {
       installButton.disabled = true;
       installButton.classList.add('installed');
     } else if (isIOS && isSafari) {
+      // iOS Safari - 수동 설치 안내
       installButton.innerHTML = '<i class="fab fa-apple"></i> iOS에 설치하기';
+      installButton.disabled = false;
     } else if (deferredPrompt) {
+      // Chrome/Edge - 자동 설치 프롬프트
       installButton.innerHTML = '<i class="fas fa-download"></i> 앱 설치하기';
       installButton.disabled = false;
-    } else if (isChrome || isAndroid) {
-      installButton.innerHTML = '<i class="fas fa-download"></i> 앱 설치하기';
+    } else {
+      // PWA 설치 프롬프트 대기 중 (Chrome/Edge)
+      installButton.innerHTML = '<i class="fas fa-download"></i> 앱 설치 준비 중...';
       installButton.disabled = true;
+      
+      // 3초 후에도 프롬프트가 없으면 직접 링크 제공
       setTimeout(() => {
-        if (deferredPrompt) {
+        if (!deferredPrompt && !isIOS) {
+          installButton.innerHTML = '<i class="fas fa-external-link-alt"></i> 웹사이트로 이동';
           installButton.disabled = false;
+          installButton.onclick = () => {
+            window.location.href = 'https://peacenpark.github.io/electric/';
+          };
         }
       }, 3000);
-    } else {
-      installButton.innerHTML = '<i class="fas fa-browser"></i> 지원되지 않는 브라우저';
-      installButton.disabled = true;
     }
   };
   
   // QR 코드 생성 함수 정의
   function generateQRCode() {
-  if (qrCodeElement) {
-    // 현재 페이지의 URL을 QR 코드로 생성
-    const currentUrl = window.location.href;
-    
-    // div를 비웁니다
-    qrCodeElement.innerHTML = '';
-    
-    // 새 이미지 요소 생성
-    const img = document.createElement('img');
-    img.style.width = '200px';
-    img.style.height = '200px';
-    
-    // QR 코드를 데이터 URL로 생성하여 이미지에 설정
-    QRCode.toDataURL(currentUrl, {
-      width: 200,
-      margin: 2,
-      color: {
-        dark: '#2b5596',
-        light: '#ffffff'
-      }
-    }, function(error, url) {
-      if (error) {
-        console.error('QR 코드 생성 중 오류 발생:', error);
-        qrCodeElement.innerHTML = '<p>QR 코드 생성에 실패했습니다.</p>';
-      } else {
-        img.src = url;
-        qrCodeElement.appendChild(img);
-      }
-    });
+    if (qrCodeElement) {
+      // 현재 페이지의 URL을 QR 코드로 생성
+      const currentUrl = window.location.href;
+      
+      // div를 비웁니다
+      qrCodeElement.innerHTML = '';
+      
+      // 새 이미지 요소 생성
+      const img = document.createElement('img');
+      img.style.width = '200px';
+      img.style.height = '200px';
+      
+      // QR 코드를 데이터 URL로 생성하여 이미지에 설정
+      QRCode.toDataURL(currentUrl, {
+        width: 200,
+        margin: 2,
+        color: {
+          dark: '#2b5596',
+          light: '#ffffff'
+        }
+      }, function(error, url) {
+        if (error) {
+          console.error('QR 코드 생성 중 오류 발생:', error);
+          qrCodeElement.innerHTML = '<p>QR 코드 생성에 실패했습니다.</p>';
+        } else {
+          img.src = url;
+          qrCodeElement.appendChild(img);
+        }
+      });
+    }
   }
-}
   
   // PWA 설치 프롬프트 이벤트
   let deferredPrompt;
