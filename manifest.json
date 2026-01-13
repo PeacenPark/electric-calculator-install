@@ -2,7 +2,7 @@
   "name": "전기 계산기",
   "short_name": "전기계산기",
   "description": "전기공사 관련 다양한 계산 도구 제공",
-  "start_url": "https://peacenpark.github.io/electric/",
+  "start_url": "https://electricalcal.netlify.app",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#ebf5ff",
