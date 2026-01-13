@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
           installButton.innerHTML = '<i class="fas fa-external-link-alt"></i> 웹사이트로 이동';
           installButton.disabled = false;
           installButton.onclick = () => {
-            window.location.href = 'https://peacenpark.github.io/electric/';
+            window.location.href = 'https://electricalcal.netlify.app/';
           };
         }
       }, 3000);
