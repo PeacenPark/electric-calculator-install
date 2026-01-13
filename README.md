@@ -7,9 +7,32 @@
 실제 앱:     https://electricalcal.netlify.app
 ```
 
+## ✨ 핵심 기능: 북마크 자동 리디렉션
+
+**iOS "홈 화면에 추가" 시:**
+1. 사용자가 설치 페이지(`electric-install.netlify.app`)를 북마크
+2. 홈 화면 아이콘 탭 시 자동으로 실제 앱(`electricalcal.netlify.app`)으로 이동
+3. 사용자는 설치 페이지가 아닌 **실제 앱**을 사용하게 됨
+
+**작동 원리:**
+```javascript
+// index.html의 <head>에 있는 스크립트
+const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+
+if (isStandalone) {
+  // 홈 화면에서 실행된 경우 실제 앱으로 리디렉션
+  window.location.replace('https://electricalcal.netlify.app');
+}
+```
+
 ## 🔧 수정된 파일 목록
 
-### 1. manifest.json
+### 1. index.html (✅ 중요!)
+- `<head>` 섹션에 자동 리디렉션 스크립트 추가
+- 홈 화면에서 실행 시 즉시 실제 앱으로 이동
+- iOS 설치 안내 모달에 4단계 추가 (앱 실행 안내)
+
+### 2. manifest.json
 ```json
 {
   "start_url": "https://electricalcal.netlify.app",
@@ -112,7 +135,19 @@ https://electric-install.netlify.app/qr
 
 ## 📱 테스트 체크리스트
 
-### iOS Safari
+### iOS Safari - 북마크 리디렉션 테스트 ⭐
+1. [ ] Safari로 `electric-install.netlify.app` 접속
+2. [ ] "iOS에 설치하기" 버튼 클릭 → 모달 표시 확인
+3. [ ] Safari 공유 버튼 → "홈 화면에 추가" 실행
+4. [ ] 홈 화면에 "전기 계산기" 아이콘 생성 확인
+5. [ ] **아이콘 탭 시 `electricalcal.netlify.app`이 열리는지 확인** ⭐
+6. [ ] 주소창에 실제 앱 URL이 표시되는지 확인
+
+### iOS Safari - 일반 접속
+- [ ] Safari로 설치 페이지 접속 시 설치 안내 페이지 표시
+- [ ] 홈 화면에서만 리디렉션 작동 (브라우저에서는 안내 페이지 유지)
+
+### Android Chrome
 - [ ] 설치 페이지 접속
 - [ ] "iOS에 설치하기" 버튼이 활성화되어 있음
 - [ ] 버튼 클릭 시 모달 표시
