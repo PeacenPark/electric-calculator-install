@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', function() {
   // 서비스 워커 등록
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js')  // 경로 수정
+    navigator.serviceWorker.register('./sw.js')
       .then(registration => {
         console.log('ServiceWorker 등록 성공:', registration.scope);
       })
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
           installButton.innerHTML = '<i class="fas fa-external-link-alt"></i> 웹사이트로 이동';
           installButton.disabled = false;
           installButton.onclick = () => {
-            window.location.href = 'https://electricalcal.netlify.app/';
+            window.location.href = 'https://electricalcal.netlify.app';
           };
         }
       }, 3000);
@@ -65,8 +65,8 @@ document.addEventListener('DOMContentLoaded', function() {
   // QR 코드 생성 함수 정의
   function generateQRCode() {
     if (qrCodeElement) {
-      // 현재 페이지의 URL을 QR 코드로 생성
-      const currentUrl = window.location.href;
+      // 실제 앱 URL을 QR 코드로 생성
+      const appUrl = 'https://electricalcal.netlify.app';
       
       // div를 비웁니다
       qrCodeElement.innerHTML = '';
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
       img.style.height = '200px';
       
       // QR 코드를 데이터 URL로 생성하여 이미지에 설정
-      QRCode.toDataURL(currentUrl, {
+      QRCode.toDataURL(appUrl, {
         width: 200,
         margin: 2,
         color: {
@@ -164,9 +164,9 @@ document.addEventListener('DOMContentLoaded', function() {
       // 설치 성공 시 처리
       if (outcome === 'accepted') {
         trackEvent('install_accepted');
-        // 1.5초 후 원본 앱으로 리디렉션 (선택사항)
+        // 1.5초 후 원본 앱으로 리디렉션
         setTimeout(() => {
-          //window.location.href = 'https://원본앱주소.com';
+          window.location.href = 'https://electricalcal.netlify.app';
         }, 1500);
       }
     }
@@ -186,7 +186,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // 버튼 상태 업데이트
     updateInstallButtonState();
     
-    // 성공 메시지 표시 (선택사항)
+    // 성공 메시지 표시
     const successMessage = document.createElement('div');
     successMessage.className = 'install-success';
     successMessage.innerHTML = '<div class="success-content"><i class="fas fa-check-circle"></i><h3>설치 완료!</h3><p>앱이 성공적으로 설치되었습니다.</p></div>';
@@ -196,8 +196,8 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => {
       document.body.removeChild(successMessage);
       
-      // 원본 앱으로 리디렉션 (선택사항)
-      //window.location.href = 'https://원본앱주소.com';
+      // 원본 앱으로 리디렉션
+      window.location.href = 'https://electricalcal.netlify.app';
     }, 3000);
   });
   
