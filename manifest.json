@@ -2,11 +2,12 @@
   "name": "전기 계산기",
   "short_name": "전기계산기",
   "description": "전기공사 관련 다양한 계산 도구 제공",
-  "start_url": "https://electricalcal.netlify.app/",
+  "start_url": "https://peacenpark.github.io/electric/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#ebf5ff",
   "theme_color": "#2b5596",
+  "scope": "/",
   "icons": [
     {
       "src": "icons/icon-72x72.png",
@@ -80,12 +81,6 @@
       "label": "모바일 메인 화면"
     }
   ],
-  "scope": "/",
-  "related_applications": [
-    {
-      "platform": "web"
-    }
-  ],
   "categories": ["utilities", "productivity", "tools"],
   "lang": "ko-KR",
   "dir": "ltr",
@@ -95,14 +90,14 @@
       "name": "케이블 계산기",
       "short_name": "케이블",
       "description": "케이블 계산기 화면으로 바로가기",
-      "url": "/cable2.html",
+      "url": "https://peacenpark.github.io/electric/cable2.html",
       "icons": [{ "src": "icons/shortcut-cable.png", "sizes": "192x192" }]
     },
     {
       "name": "전선관 계산기",
       "short_name": "전선관",
       "description": "전선관 크기 계산기 화면으로 바로가기",
-      "url": "/conduit-size.html",
+      "url": "https://peacenpark.github.io/electric/conduit-size.html",
       "icons": [{ "src": "icons/shortcut-conduit.png", "sizes": "192x192" }]
     }
   ],
