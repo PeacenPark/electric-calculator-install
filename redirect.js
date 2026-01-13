@@ -19,16 +19,16 @@ const pathMappings = {
   '/jp': '/index.html?lang=ja',
   
   // 원본 앱으로 리디렉션
-  '/app/main': 'https://peacenpark.github.io/electric/',
-  '/app/cable': 'https://peacenpark.github.io/electric//cable2.html'
+  '/app/main': 'https://electricalcal.netlify.app',
+  '/app/cable': 'https://electricalcal.netlify.app/cable2.html'
 };
 
 // 현재 경로 확인
 const currentPath = window.location.pathname;
 
-// 패스 매칭 함수 (GitHub Pages 404 페이지 리디렉션 처리용)
+// 패스 매칭 함수 (404 페이지 리디렉션 처리용)
 function handleRedirect() {
-  // GitHub Pages 404 페이지에서만 실행 (임의로 설정한 쿼리 파라미터로 검사)
+  // 404 페이지에서만 실행
   if (window.location.search.includes('is404=true')) {
     // 경로 정리 (뒤의 슬래시 제거)
     const path = currentPath.endsWith('/') && currentPath !== '/' 
@@ -58,8 +58,6 @@ function handleRedirect() {
 // 설치 완료 후 리디렉션 함수
 function redirectAfterInstall() {
   // 설치 완료 이후 원본 앱으로 리디렉션 (선택 사항)
-  // 현재는 비활성화 - 필요 시 아래 코드를 활성화
-  /*
   if (window.matchMedia('(display-mode: standalone)').matches || 
       window.navigator.standalone === true) {
     
@@ -72,11 +70,10 @@ function redirectAfterInstall() {
       
       // 3초 후 원본 앱으로 리디렉션
       setTimeout(() => {
-        window.location.href = 'https://원본앱주소.com';
+        window.location.href = 'https://electricalcal.netlify.app';
       }, 3000);
     }
   }
-  */
 }
 
 // URL 매개변수 파싱

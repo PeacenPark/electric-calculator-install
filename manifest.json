@@ -90,14 +90,14 @@
       "name": "케이블 계산기",
       "short_name": "케이블",
       "description": "케이블 계산기 화면으로 바로가기",
-      "url": "https://peacenpark.github.io/electric/cable2.html",
+      "url": "https://electricalcal.netlify.app/cable2.html",
       "icons": [{ "src": "icons/shortcut-cable.png", "sizes": "192x192" }]
     },
     {
       "name": "전선관 계산기",
       "short_name": "전선관",
       "description": "전선관 크기 계산기 화면으로 바로가기",
-      "url": "https://peacenpark.github.io/electric/conduit-size.html",
+      "url": "https://electricalcal.netlify.app/conduit-size.html",
       "icons": [{ "src": "icons/shortcut-conduit.png", "sizes": "192x192" }]
     }
   ],

@@ -9,36 +9,36 @@
       '/get': '/index.html?source=direct',
       '/install': '/index.html?auto=true',
       '/qr': '/index.html?source=qr',
-      '/app': '/index.html?source=app'
+      '/app': 'https://electricalcal.netlify.app'
     };
     
-    // 경로와 쿼리 파라미터 추출
+    // 경로 추출
     const path = window.location.pathname;
-    const repo = path.split('/')[1]; // 저장소 이름
-    const route = '/' + path.split('/').slice(2).join('/'); // 실제 경로
     
     // 현재 URL의 쿼리 파라미터 유지
     const query = window.location.search;
     
     // 매핑된 리디렉션이 있는지 확인
-    if (redirectMap[route]) {
-      // 리디렉션 URL 구성
-      let redirectUrl = '/' + repo + redirectMap[route];
+    if (redirectMap[path]) {
+      let redirectUrl = redirectMap[path];
       
-      // 기존 쿼리 파라미터가 있는 경우 합치기
-      if (query && redirectMap[route].includes('?')) {
-        // 이미 쿼리 파라미터가 있는 경우 '&'로 연결
-        redirectUrl = redirectUrl.replace('?', query + '&');
-      } else if (query) {
-        // 쿼리 파라미터가 없는 경우 그대로 추가
-        redirectUrl += query;
+      // 외부 URL인 경우 직접 리디렉션
+      if (redirectUrl.startsWith('http')) {
+        window.location.replace(redirectUrl);
+      } else {
+        // 기존 쿼리 파라미터가 있는 경우 합치기
+        if (query && redirectUrl.includes('?')) {
+          redirectUrl = redirectUrl.replace('?', query + '&');
+        } else if (query) {
+          redirectUrl += query;
+        }
+        
+        // 리디렉션 실행
+        window.location.replace(redirectUrl);
       }
-      
-      // 리디렉션 실행
-      window.location.replace(redirectUrl);
     } else {
       // 매핑이 없으면 인덱스 페이지로
-      window.location.replace('/' + repo + '/index.html');
+      window.location.replace('/index.html');
     }
   </script>
   <style>
